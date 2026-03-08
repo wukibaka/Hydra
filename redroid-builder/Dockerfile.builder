@@ -6,6 +6,13 @@ ARG username=builder
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+# Use TUNA mirror
+RUN echo "deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal main restricted universe multiverse\n\
+deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-updates main restricted universe multiverse\n\
+deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-backports main restricted universe multiverse\n\
+deb http://mirrors.tuna.tsinghua.edu.cn/ubuntu/ focal-security main restricted universe multiverse" \
+    > /etc/apt/sources.list
+
 # AOSP build dependencies
 RUN apt-get update && apt-get install -y \
     bc \

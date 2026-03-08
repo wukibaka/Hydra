@@ -16,6 +16,7 @@ BUILD_DIR          := $(SRC_DIR)
 NPROC              := $(shell nproc)
 MIHOMO_VERSION     := v1.19.0
 NDK_TRANS_VERSION  := android-14
+AOSP_MIRROR        := sustech
 
 # Derived
 BUILDER_UID        := $(shell id -u)
@@ -28,7 +29,7 @@ CONFIG_DIR         := $(shell pwd)/configs
 APK_DIR            := $(shell cd .. && pwd)/apks
 
 export ANDROID_VERSION ANDROID_BRANCH REDROID_BRANCH IMAGE_NAME IMAGE_TAG
-export SRC_DIR BUILD_DIR NPROC MIHOMO_VERSION NDK_TRANS_VERSION
+export SRC_DIR BUILD_DIR NPROC MIHOMO_VERSION NDK_TRANS_VERSION AOSP_MIRROR
 export BUILDER_UID BUILDER_GID BUILDER_USER
 export SCRIPT_DIR OVERLAY_DIR MANIFEST_DIR CONFIG_DIR APK_DIR
 
@@ -41,7 +42,7 @@ help: ## Show this help
 		awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-15s\033[0m %s\n", $$1, $$2}'
 
 setup: ## Build the AOSP builder Docker image
-	docker build \
+	docker build --network=host \
 		--build-arg userid=$(BUILDER_UID) \
 		--build-arg groupid=$(BUILDER_GID) \
 		--build-arg username=$(BUILDER_USER) \
