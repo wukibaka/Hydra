@@ -11,11 +11,11 @@ COPY gapps/system/ /system/
 ADD ndk_translation.tar /
 
 # ============================================
-# 3. Mihomo 代理内核 (linux-amd64)
+# 3. Mihomo 代理内核 (android-amd64)
 # ============================================
-COPY mihomo /system/bin/mihomo
-COPY mihomo.rc /system/etc/init/mihomo.rc
-COPY mihomo-config.yaml /system/etc/mihomo/config.yaml
+COPY --chmod=755 mihomo /system/bin/mihomo
+COPY --chmod=644 mihomo.rc /system/etc/init/mihomo.rc
+COPY --chmod=644 mihomo-config.yaml /system/etc/mihomo/config.yaml
 
 # ============================================
 # 4. 预装应用 (split APK — 所有 .apk 放同一目录)

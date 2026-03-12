@@ -67,10 +67,10 @@ else
 fi
 
 # ============================================
-# 3. Mihomo (linux-amd64)
+# 3. Mihomo (android-amd64)
 # ============================================
-MIHOMO_VERSION="v1.19.20"
-MIHOMO_URL="https://github.com/MetaCubeX/mihomo/releases/download/${MIHOMO_VERSION}/mihomo-linux-amd64-${MIHOMO_VERSION}.gz"
+MIHOMO_VERSION="v1.19.21"
+MIHOMO_URL="https://github.com/MetaCubeX/mihomo/releases/download/${MIHOMO_VERSION}/mihomo-android-amd64-${MIHOMO_VERSION}.gz"
 
 if [ ! -f "mihomo" ]; then
     echo "==> Downloading Mihomo ${MIHOMO_VERSION}..."
