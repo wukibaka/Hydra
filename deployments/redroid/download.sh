@@ -46,28 +46,7 @@ else
 fi
 
 # ============================================
-# 2. libndk_translation (ARM -> x86 translation)
-# ============================================
-# 14.0.0 is a symlink to 13.0.0 which links to 12.0.0 (same binary)
-NDK_URL="https://raw.githubusercontent.com/zhouziyang/libndk_translation/master/libndk_translation-12.0.0.tar"
-
-if [ ! -f "ndk_translation.tar" ]; then
-    echo "==> Downloading libndk_translation..."
-    curl -L -o ndk_translation.tar "$NDK_URL"
-
-    # Verify it's a valid tar
-    if ! tar tf ndk_translation.tar > /dev/null 2>&1; then
-        echo "ERROR: Downloaded ndk_translation.tar is not a valid tar archive"
-        rm -f ndk_translation.tar
-        exit 1
-    fi
-    echo "==> libndk_translation downloaded."
-else
-    echo "==> libndk_translation already downloaded, skipping."
-fi
-
-# ============================================
-# 3. Mihomo (android-amd64)
+# 2. Mihomo (android-amd64)
 # ============================================
 MIHOMO_VERSION="v1.19.21"
 MIHOMO_URL="https://github.com/MetaCubeX/mihomo/releases/download/${MIHOMO_VERSION}/mihomo-android-amd64-${MIHOMO_VERSION}.gz"
@@ -85,7 +64,7 @@ else
 fi
 
 # ============================================
-# 4. APKs (WhatsApp)
+# 3. APKs (WhatsApp)
 # ============================================
 # XAPK files are stored in Git LFS at apks/ (project root).
 # They contain split APKs (base + config splits) in ZIP format.
@@ -146,7 +125,6 @@ prepare_app_pkg "WhatsAppBusiness" "com.whatsapp.w4b" "WhatsAppBusiness*.xapk"
 echo ""
 echo "==> Download summary:"
 echo "    MindTheGapps:       $([ -d gapps/system ] && echo 'OK' || echo 'MISSING')"
-echo "    libndk_translation: $([ -f ndk_translation.tar ] && echo 'OK' || echo 'MISSING')"
 echo "    Mihomo:             $([ -f mihomo ] && echo 'OK' || echo 'MISSING')"
 echo "    Via:                $([ -d Via ] && [ -n "$(ls Via/*.apk 2>/dev/null)" ] && echo 'OK' || echo 'MISSING')"
 echo "    WhatsApp:           $([ -d WhatsApp ] && [ -n "$(ls WhatsApp/*.apk 2>/dev/null)" ] && echo 'OK' || echo 'MISSING')"
@@ -155,7 +133,6 @@ echo ""
 
 MISSING=0
 [ ! -d "gapps/system" ] && MISSING=1
-[ ! -f "ndk_translation.tar" ] && MISSING=1
 [ ! -f "mihomo" ] && MISSING=1
 
 VIA_OK=0; WA_OK=0; WAB_OK=0
